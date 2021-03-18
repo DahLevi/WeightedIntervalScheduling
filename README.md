@@ -20,6 +20,15 @@ Following the computation of p, the ```memoizationComputeOpt``` Method recursive
 In order to then print out the optimal scheduling, another recursive function is utilized ```calculateSchedule``` to reveal the compatible and also optimal jobs.
 
 ## Testing:
-![image](https://user-images.githubusercontent.com/48925786/111600912-12c67080-878f-11eb-9239-d3ecfad17ca4.png)
+The files labeled jobx.csv represent an array of jobs to be scheduled with this program. They are examples from the slides presented in class and below in the Screenshots/Proof of operation section, is the output for each file.
 
 ## Screenshots/Proof of operation
+### Job 1 File
+![image](https://user-images.githubusercontent.com/48925786/111615292-c9315200-879d-11eb-9368-246adbdd0ba8.png)
+
+### Job 2 File
+![image](https://user-images.githubusercontent.com/48925786/111616307-faf6e880-879e-11eb-9907-6f830eb620d8.png)
+
+### Job 3 File
+![image](https://user-images.githubusercontent.com/48925786/111616855-9d16d080-879f-11eb-8520-c46b8ae458fc.png)
+
