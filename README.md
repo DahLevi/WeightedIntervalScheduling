@@ -4,9 +4,9 @@
 Given a CSV file with lists of jobs in the format of Start-time,End-time,Duration the program will calculate the optimal jobs to be scheduled based on the start time, end time and weight of the job. This allows for strategic scheduling and optimization of time and personnel resources.
 
 ## User Manual:
-- Ensure you have Java 1.8 JRE installed
+- Ensure you have Java 1.8 JRE installed and correctly configured on your system PATH
 - Download or clone this repo and put the jar and csv files in a folder on your desktop (For ease of access)
-- Open a command prompt and enter ```java -jar scheduling.jar```
+- Open a command prompt and enter ```java -jar <directory of jar>/WeightedIntervalScheduling.jar```
 - Follow the prompt(s) and allow for scheduling to complete
 - View the output on the console screen
 
@@ -23,6 +23,9 @@ In order to then print out the optimal scheduling, another recursive function is
 The files labeled jobx.csv represent an array of jobs to be scheduled with this program. They are examples from the slides presented in class and below in the Screenshots/Proof of operation section, is the output for each file.
 
 ## Screenshots/Proof of operation
+### Command Prompt Interface
+![image](https://user-images.githubusercontent.com/48925786/111619001-45c62f80-87a2-11eb-9e39-93ae7c26791c.png)
+
 ### Job 1 File
 ![image](https://user-images.githubusercontent.com/48925786/111615292-c9315200-879d-11eb-9368-246adbdd0ba8.png)
 
