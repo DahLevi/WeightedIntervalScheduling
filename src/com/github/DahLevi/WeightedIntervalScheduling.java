@@ -13,11 +13,14 @@ public class WeightedIntervalScheduling {
     public WeightedIntervalScheduling(File file) throws FileNotFoundException {
         if (readFromFile(file)) {
             Collections.sort(sortedSchedules);
-            p = p(sortedSchedules.size());
-            memoization = new int[sortedSchedules.size()];
             p = new int[sortedSchedules.size()];
+            memoization = new int[sortedSchedules.size()];
+
+            p = nextCompatibleJob(sortedSchedules.size()-1);
+
             memoization[0] = sortedSchedules.get(0).getWeight();
             memoizationComputeOpt(sortedSchedules.size()-1);
+
             printResults();
         }
     }
@@ -43,20 +46,16 @@ public class WeightedIntervalScheduling {
         return true;
     }
 
-    private int[] p(int index){
+
+    private int[] nextCompatibleJob(int index){
         int[] p = new int[sortedSchedules.size()];
-        int currentSchedule = index - 1;
-        int compareToPreviousSchedule = index - 2;
-        while (currentSchedule >= 0){
-            //Don't go to a location outside of the indeces of
-            if(sortedSchedules.get(currentSchedule).getStartTime() <= 0 || compareToPreviousSchedule < 0){
-                p[currentSchedule] = -1;
-                currentSchedule--;
-                compareToPreviousSchedule--;
-            } else if (sortedSchedules.get(currentSchedule).getStartTime() >= sortedSchedules.get(compareToPreviousSchedule).getEndTime()){
+        int currentSchedule = index;
+        int compareToPreviousSchedule = index - 1;
+        while (compareToPreviousSchedule >= 0){
+            if (sortedSchedules.get(currentSchedule).getStartTime() >= sortedSchedules.get(compareToPreviousSchedule).getEndTime()){
                 p[currentSchedule] = compareToPreviousSchedule;
-                currentSchedule--;
-                compareToPreviousSchedule--;
+                currentSchedule = currentSchedule - 1;
+                compareToPreviousSchedule = currentSchedule - 1;
             } else {
                 compareToPreviousSchedule--;
             }
@@ -73,7 +72,6 @@ public class WeightedIntervalScheduling {
             return memoization[j];
         } else {
             memoization[j] = Math.max(sortedSchedules.get(j).getWeight() + memoizationComputeOpt(p[j]), memoizationComputeOpt(j-1));
-            memoization[j-1] = sortedSchedules.get(j-1).getWeight() + memoizationComputeOpt(p[j-1]);
         }
         return memoization[j];
     }
@@ -81,7 +79,7 @@ public class WeightedIntervalScheduling {
     public void calculateSchedule(int index){
         if (index > 0) {
             if(sortedSchedules.get(index).getWeight() + memoization[p[index]] > memoization[index-1]){
-                System.out.println("At index: " + index + " Start Time: " + sortedSchedules.get(index).getStartTime() + " End Time " + sortedSchedules.get(index).getEndTime() + " Weight: " + sortedSchedules.get(index).getWeight());
+                System.out.println("At index: " + (index+1) + " Start Time: " + sortedSchedules.get(index).getStartTime() + " End Time " + sortedSchedules.get(index).getEndTime() + " Weight: " + sortedSchedules.get(index).getWeight());
                 calculateSchedule(p[index]); // Go back through the p
             } else {
                 calculateSchedule(index - 1);
@@ -99,9 +97,9 @@ public class WeightedIntervalScheduling {
 
         for (Schedule schedule: sortedSchedules) {
             System.out.println();
-            String startTime = String.format("%5o", schedule.getStartTime());
-            String endTime = String.format("%10o", schedule.getEndTime());
-            String weight = String.format("%12o", schedule.getWeight());
+            String startTime = String.format("%5d", schedule.getStartTime());
+            String endTime = String.format("%10d", schedule.getEndTime());
+            String weight = String.format("%12d", schedule.getWeight());
             System.out.print(startTime);
             System.out.print(endTime);
             System.out.print(weight);
@@ -109,6 +107,6 @@ public class WeightedIntervalScheduling {
 
         System.out.println();
         System.out.println("Optimal Jobs: ");
-        calculateSchedule(sortedSchedules.size() - 1);
+        calculateSchedule(sortedSchedules.size()-1);
     }
 }

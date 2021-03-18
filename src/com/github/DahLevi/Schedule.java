@@ -37,6 +37,6 @@ public class Schedule implements Comparable<Schedule>{
 
     @Override
     public int compareTo(Schedule schedule){
-        return Integer.compare(getWeight(), schedule.getWeight());
+        return Integer.compare(getEndTime(), schedule.getEndTime());
     }
 }
