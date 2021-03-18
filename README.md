@@ -1,7 +1,6 @@
 # Weighted Interval Scheduling Extra Credit Implementation
-
-## Project Devoper: Levi Dahlberg
-Description:
+ Project Devoper: Levi Dahlberg
+## Description:
 Given a CSV file with lists of jobs in the format of Start-time,End-time,Duration the program will calculate the optimal jobs to be scheduled based on the start time, end time and weight of the job. This allows for strategic scheduling and optimization of time and personnel resources.
 
 ## User Manual:
